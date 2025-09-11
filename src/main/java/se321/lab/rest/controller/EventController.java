@@ -1,6 +1,8 @@
 package se321.lab.rest.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import se321.lab.entity.Event;
 
 import jakarta.annotation.PostConstruct;
@@ -110,4 +112,9 @@ public class EventController {
                 .organizer("Chris Brown")
                 .build());
     }
+    @GetMapping("events")
+    public ResponseEntity<?> getEventLists() {
+        return ResponseEntity.ok(eventList);
+    }
+
 }
