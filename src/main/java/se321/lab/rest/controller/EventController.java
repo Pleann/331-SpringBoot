@@ -22,8 +22,10 @@ import java.util.List;
 public class EventController {
     final EventService eventService;
     @GetMapping("events")
-    public ResponseEntity<?> getEventLists(@RequestParam(value = " _limit ",required=false) Integer perPage
-            ,@RequestParam(value = "_page",required = false) Integer page) {
+    public ResponseEntity<?> getEventLists(
+            @RequestParam(value = "_limit", required = false) Integer perPage,
+            @RequestParam(value = "_page", required = false) Integer page) {
+
         List<Event> output = null;
         Integer eventSize = eventService.getEventSize();
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -31,10 +33,10 @@ public class EventController {
 
         try {
             output = eventService.getEvents(perPage, page);
+            return new ResponseEntity<>(output, responseHeaders, HttpStatus.OK);
         } catch (IndexOutOfBoundsException ex) {
             return new ResponseEntity<>(output, responseHeaders, HttpStatus.OK);
         }
-        return new ResponseEntity<>(output, responseHeaders, HttpStatus.OK);
     }
 
     @GetMapping("events/{id}")
