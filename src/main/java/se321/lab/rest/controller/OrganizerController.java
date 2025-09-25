@@ -1,6 +1,7 @@
 package se321.lab.rest.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class OrganizerController {
             @RequestParam(value = "_limit", required = false) Integer perPage,
             @RequestParam(value = "_page", required = false) Integer page) {
 
-        List<Organizer> output = organizerService.getOrganizers(perPage, page);
+        Page<Organizer> output = organizerService.getOrganizers(perPage, page);
         Integer organizerSize = organizerService.getOrganizerSize();
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("x-total-count", String.valueOf(organizerSize));

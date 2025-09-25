@@ -1,13 +1,20 @@
 package se321.lab.dao;
 
 import jakarta.annotation.PostConstruct;
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
+import se321.lab.entity.Event;
 import se321.lab.entity.Organizer;
+import se321.lab.repository.OrganizerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Primary
 public class OrganizerDaoImpl implements OrganizerDao {
     List<Organizer> organizerList;
 
@@ -30,17 +37,30 @@ public class OrganizerDaoImpl implements OrganizerDao {
     }
 
     @Override
-    public List<Organizer> getOrganizers(Integer pageSize, Integer page) {
+    public Page<Organizer> getOrganizers(Integer pageSize, Integer page) {
         pageSize = pageSize == null ? organizerList.size() : pageSize;
         page = page == null ? 1 : page;
         int firstIndex = (page - 1) * pageSize;
-        int toIndex = Math.min(firstIndex + pageSize, organizerList.size());
-        if (firstIndex >= organizerList.size()) return List.of();
-        return organizerList.subList(firstIndex, toIndex);
+        List<Organizer> pageContent;
+        if (firstIndex >= organizerList.size()) {
+            pageContent = new ArrayList<>();
+        } else if (firstIndex + pageSize > organizerList.size()) {
+            pageContent = organizerList.subList(firstIndex, organizerList.size());
+        } else {
+            pageContent = organizerList.subList(firstIndex, firstIndex + pageSize);
+        }
+        return new PageImpl<>(pageContent, PageRequest.of(page, pageSize), organizerList.size());
     }
 
     @Override
     public Organizer getOrganizer(Long id) {
         return organizerList.stream().filter(o -> o.getId().equals(id)).findFirst().orElse(null);
+    }
+
+    @Override
+    public Organizer save(Organizer organizer) {
+        organizer.setId(organizerList.get(organizerList.size() - 1).getId() + 1);
+        organizerList.add(organizer);
+        return organizer;
     }
 }
