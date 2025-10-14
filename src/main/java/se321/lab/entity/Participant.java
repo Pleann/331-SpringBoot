@@ -1,0 +1,25 @@
+package se321.lab.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import java.util.List;
+
+@Data
+@Builder
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+public class Participant {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
+    private Long id;
+
+    private String name;
+    private String telNo;
+
+    // Many events can include this participant
+    @ManyToMany
+    private List<Event> eventHistory;
+}
