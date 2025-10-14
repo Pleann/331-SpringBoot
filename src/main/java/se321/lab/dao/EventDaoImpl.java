@@ -7,9 +7,11 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import se321.lab.entity.Event;
+import se321.lab.entity.Organizer;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Repository
 @Profile("manuel")
@@ -19,6 +21,14 @@ public class EventDaoImpl implements EventDao {
     @PostConstruct
     public void init() {
         eventList = new ArrayList<>();
+        Organizer kat = Organizer.builder().id(1L).name("Kat Laydee").build();
+        Organizer fern = Organizer.builder().id(2L).name("Fern Pollin").build();
+        Organizer carey = Organizer.builder().id(1L).name("Carey Wales").build();
+        Organizer dawg = Organizer.builder().id(2L).name("Dawg Dahd").build();
+        Organizer kahn = Organizer.builder().id(1L).name("Kahn Opiner").build();
+        Organizer brody = Organizer.builder().id(2L).name("Brody Kill").build();
+        Organizer ada = Organizer.builder().id(1L).name("Dr. Ada Lovelace").build();
+        Organizer chris = Organizer.builder().id(2L).name("Chris Brown").build();
         eventList.add(Event.builder()
                 .id(123L)
                 .category("animal welfare")
@@ -28,7 +38,7 @@ public class EventDaoImpl implements EventDao {
                 .date("January 28, 2022")
                 .time("12:00")
                 .petAllowed(true)
-                .organizer("Kat Laydee")
+                .organizer(kat)
                 .build());
 
         eventList.add(Event.builder()
@@ -40,7 +50,7 @@ public class EventDaoImpl implements EventDao {
                 .date("March 14, 2022")
                 .time("10:00")
                 .petAllowed(true)
-                .organizer("Fern Pollin")
+                .organizer(fern)
                 .build());
 
         eventList.add(Event.builder()
@@ -52,7 +62,7 @@ public class EventDaoImpl implements EventDao {
                 .date("July 22, 2022")
                 .time("11:00")
                 .petAllowed(false)
-                .organizer("Carey Wales")
+                .organizer(carey)
                 .build());
 
         eventList.add(Event.builder()
@@ -64,7 +74,7 @@ public class EventDaoImpl implements EventDao {
                 .date("August 28, 2022")
                 .time("12:00")
                 .petAllowed(true)
-                .organizer("Dawg Dahd")
+                .organizer(dawg)
                 .build());
 
         eventList.add(Event.builder()
@@ -76,7 +86,7 @@ public class EventDaoImpl implements EventDao {
                 .date("September 14, 2022")
                 .time("3:00")
                 .petAllowed(true)
-                .organizer("Kahn Opiner")
+                .organizer(kahn)
                 .build());
 
         eventList.add(Event.builder()
@@ -88,7 +98,7 @@ public class EventDaoImpl implements EventDao {
                 .date("July 22, 2022")
                 .time("11:00")
                 .petAllowed(false)
-                .organizer("Brody Kill")
+                .organizer(brody)
                 .build());
 
         eventList.add(Event.builder()
@@ -100,7 +110,7 @@ public class EventDaoImpl implements EventDao {
                 .date("August 15, 2022")
                 .time("09:00")
                 .petAllowed(false)
-                .organizer("Dr. Ada Lovelace")
+                .organizer(ada)
                 .build());
 
         eventList.add(Event.builder()
@@ -112,7 +122,7 @@ public class EventDaoImpl implements EventDao {
                 .date("December 10, 2022")
                 .time("13:00")
                 .petAllowed(false)
-                .organizer("Chris Brown")
+                .organizer(chris)
                 .build());
     }
 
