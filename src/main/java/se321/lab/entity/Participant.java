@@ -1,7 +1,10 @@
 package se321.lab.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,6 +23,9 @@ public class Participant {
     private String telNo;
 
     // Many events can include this participant
-    @ManyToMany
-    private List<Event> eventHistory;
+    @ManyToMany(mappedBy = "participants")
+    @ToString.Exclude @EqualsAndHashCode.Exclude
+    @Builder.Default
+    private List<Event> eventHistory = new ArrayList<>();
+
 }

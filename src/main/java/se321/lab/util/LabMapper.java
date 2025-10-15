@@ -2,10 +2,7 @@ package se321.lab.util;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-import se321.lab.entity.Event;
-import se321.lab.entity.EventDTO;
-import se321.lab.entity.Organizer;
-import se321.lab.entity.OrganizerDTO;
+import se321.lab.entity.*;
 
 import java.util.List;
 
@@ -16,5 +13,8 @@ public interface LabMapper {
     List<EventDTO> getEventDto (List<Event> events);
     OrganizerDTO getOrganizerDTO(Organizer organizer);
     List<OrganizerDTO> getOrganizerDTO(List<Organizer> organizers);
-
+    ParticipantDTO getParticipantDTO(Participant participant);
+    List<ParticipantDTO> getParticipantDTO(List<Participant> participants);
+    ParticipantEventDTO getParticipantEventDTO(Event event);
+    List<ParticipantEventDTO> getParticipantEventDTO(List<Event> events);
 }

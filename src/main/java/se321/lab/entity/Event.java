@@ -1,8 +1,10 @@
 package se321.lab.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -24,8 +26,14 @@ public class Event {
     Boolean petAllowed;
     @ManyToOne
     Organizer organizer;
-    @ManyToMany(mappedBy = "eventHistory")
-    List<Participant> participants;
-
+    @ManyToMany
+    @JoinTable(
+            name = "event_participant",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "participant_id")
+    )
+    @Builder.Default
+    @ToString.Exclude @EqualsAndHashCode.Exclude
+    private List<Participant> participants = new ArrayList<>();
 }
 
