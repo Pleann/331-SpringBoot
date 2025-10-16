@@ -23,7 +23,18 @@ spring:
       properties:
         hibernate:
           format_sql: true
+        sevlet:
+          multipart:
+            max-file-size: 10MB
   logging:
     level:
       org.hibernate.SQL: debug
 
+supabase:
+  storage:
+    endpoint: https://fxydjihsycfrvhqugule.storage.supabase.co/storage/v1/s3
+    endpoint_output: https://fxydjihsycfrvhqugule.storage.supabase.co/storage/v1/object/public
+    bucket: test
+    region: ap-southeast-1
+    accessKey: 440c90412364bbc9451f9e0b722d5dc9
+    secretKey: 6768fcfa0ac72d52c5b9159ad4fcb21ba42209f86c325da4011a12647d9e0e05
